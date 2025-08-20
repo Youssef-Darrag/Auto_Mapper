@@ -8,7 +8,8 @@ namespace Auto_Mapper.Helpers
     {
         public MappingProfile()
         {
-            CreateMap<Book, BookDto>();
+            CreateMap<Book, BookDto>()
+                .ForMember(dest => dest.Id, src => src.MapFrom(src => src.BookId));
         }
     }
 }
