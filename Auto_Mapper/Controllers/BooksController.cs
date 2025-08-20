@@ -1,4 +1,5 @@
-﻿using Auto_Mapper.Models;
+﻿using Auto_Mapper.DTOs;
+using Auto_Mapper.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Auto_Mapper.Controllers
@@ -13,5 +14,20 @@ namespace Auto_Mapper.Controllers
             new Book { Id = 2, Title = "Test Title 2", Author = "Test Author 2", Summary = "Summary 2", Price = 75.0 },
             new Book { Id = 3, Title = "Test Title 3", Author = "Test Author 3", Summary = "Summary 3", Price = 0 }
         };
+
+        [HttpGet]
+        public ActionResult<IEnumerable<BookDto>> GetAll()
+        {
+            var result = books.Select(b => new BookDto
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Summary = b.Summary,
+                Author = b.Author,
+                Price = b.Price
+            });
+
+            return Ok(result);
+        }
     }
 }
