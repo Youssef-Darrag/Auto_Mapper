@@ -1,5 +1,6 @@
 ﻿using Auto_Mapper.DTOs;
 using Auto_Mapper.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Auto_Mapper.Controllers
@@ -8,6 +9,13 @@ namespace Auto_Mapper.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
+        private readonly IMapper _mapper;
+
+        public BooksController(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
         List<Book> books = new()
         {
             new Book { Id = 1, Title = "Test Title 1", Author = "Test Author 1", Summary = "Summary 1", Price = 100.5 },
@@ -18,14 +26,7 @@ namespace Auto_Mapper.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<BookDto>> GetAll()
         {
-            var result = books.Select(b => new BookDto
-            {
-                Id = b.Id,
-                Title = b.Title,
-                Summary = b.Summary,
-                Author = b.Author,
-                Price = b.Price
-            });
+            var result = _mapper.Map<IEnumerable<BookDto>>(books);
 
             return Ok(result);
         }
