@@ -30,5 +30,15 @@ namespace Auto_Mapper.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<BookDto> Details(int id)
+        {
+            var book = books.SingleOrDefault(b => b.BookId == id);
+
+            var result = _mapper.Map<BookDto>(book);
+
+            return Ok(result);
+        }
     }
 }
