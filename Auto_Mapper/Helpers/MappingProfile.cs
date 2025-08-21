@@ -10,7 +10,8 @@ namespace Auto_Mapper.Helpers
         {
             CreateMap<Book, BookDto>()
                 .ForMember(dest => dest.Id, src => src.MapFrom(src => src.BookId))
-                .ForMember(dest => dest.IsFree, src => src.MapFrom(src => src.Price == 0));
+                .ForMember(dest => dest.IsFree, src => src.MapFrom(src => src.Price == 0))
+                .ReverseMap();
         }
     }
 }

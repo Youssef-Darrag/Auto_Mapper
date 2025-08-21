@@ -40,5 +40,23 @@ namespace Auto_Mapper.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost]
+        public ActionResult<Book> Create(BookDto dto)
+        {
+            var result = _mapper.Map<Book>(dto);
+
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult<Book> Update(int id, BookDto dto)
+        {
+            var book = books.SingleOrDefault(b => b.BookId == id);
+
+            var result = _mapper.Map<Book>(dto);
+
+            return Ok(result);
+        }
     }
 }
